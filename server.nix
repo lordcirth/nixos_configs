@@ -19,6 +19,7 @@
 
   users.users.root = {
     initialPassword = "root";
+    # If this is not also in the NixOps config, you will be locked out!
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAXm7oXqY1G8dBDqP7TziaXFyVwHJ5ivgwweGAWzaSDT lordcirth@nezha"
     ];
