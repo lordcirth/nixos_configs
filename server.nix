@@ -12,13 +12,16 @@ let d = import ./defaults.nix { inherit pkgs; }; in
   fileSystems = d.fileSystems // {};
   boot = d.boot // {};
 
+  services = d.services // {};
 
   # Defaults merged with this:
   users = d.users // {
     users.root = {
+      password = "root";
       # If this is not also in the NixOps config, you will be locked out!
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAXm7oXqY1G8dBDqP7TziaXFyVwHJ5ivgwweGAWzaSDT lordcirth@nezha"
+	"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuHIVfeoZ+0OGL2hfOSZu9MV247e+u1i/jb323iCkUr nfish@rsg-pc247"
       ];
     };
   };
