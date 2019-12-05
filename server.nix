@@ -1,8 +1,8 @@
 { pkgs, lib, config, ... }:
-# nix-build '<nixpkgs/nixos>' --arg configuration ./server.nix  -A config.system.build.server
-let d = import ./defaults.nix; in 
+# nix-build '<nixpkgs/nixos>' --arg configuration ./server.nix  -A config.system.build.image
+let d = import ./defaults.nix { inherit pkgs; }; in
 {
-  system.build.server = import <nixpkgs/nixos/lib/make-disk-image.nix> {
+  system.build.image = import <nixpkgs/nixos/lib/make-disk-image.nix> {
     inherit pkgs lib config;
     diskSize = 4 * 1024;
     format = "raw";
