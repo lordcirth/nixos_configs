@@ -1,3 +1,4 @@
+{ config, pkgs, ... }:
 {
   deployment.targetHost = "192.168.122.19"; 
   boot.loader.grub.devices = [ "/dev/vda" ];
@@ -18,4 +19,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuHIVfeoZ+0OGL2hfOSZu9MV247e+u1i/jb323iCkUr nfish@rsg-pc247"
     ];
   };
+
+  environment.systemPackages = [ pkgs.vim ];
 }

@@ -14,4 +14,6 @@ let d = import ./defaults.nix { inherit pkgs; }; in
   users = d.users // {
     users.root.initialPassword = "root";
   };
+
+  environment.systemPackages = [ vim ];
 }

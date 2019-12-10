@@ -1,6 +1,4 @@
-let
-  d = import ./ssh.nix;
-in
+{ config, pkgs, ... }:
 {
-  haproxy = d;
+  services.keepalived.enable = true;
 }
