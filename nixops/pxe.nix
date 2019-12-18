@@ -8,5 +8,5 @@
       tftp-root=/srv/tftp/
     '';
   };
-    #${syslinux}
+  #${syslinux}
 }

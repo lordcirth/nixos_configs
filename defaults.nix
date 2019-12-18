@@ -1,12 +1,11 @@
 { pkgs }:
 let rootfs = "/dev/disk/by-label/nixos";
-in
-{
+in {
   inherit pkgs;
   fileSystems."/" = {
     device = rootfs;
     fsType = "ext4";
-  }; 
+  };
 
   boot.loader.grub.devices = [ "/dev/vda" ];
 

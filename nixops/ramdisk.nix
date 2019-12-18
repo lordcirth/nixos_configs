@@ -1,10 +1,7 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   boot.loader.grub.devices = [ "/dev/sda" ];
 
-  fileSystems."/" = {
-    fsType = "tmpfs";
-  };
+  fileSystems."/" = { fsType = "tmpfs"; };
 
   fileSystems."/nix" = {
     device = "/dev/disk/by-label/nix";

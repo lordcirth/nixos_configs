@@ -1,13 +1,10 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   services.httpd = {
     enable = true;
     adminAddr = "lordcirth@gmail.com";
     documentRoot = "/var/www";
   };
-  systemd.services.httpd = {
-    requires = [ "httpd-init" ];
-  };
+  systemd.services.httpd = { requires = [ "httpd-init" ]; };
 
   systemd.services.httpd-init = {
     script = ''
@@ -16,7 +13,7 @@
       chown -R wwwrun /var/www
     '';
     restartIfChanged = true;
-    serviceConfig = { 
+    serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
     };

@@ -1,5 +1,4 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   deployment.targetEnv = "virtualbox";
   deployment.virtualbox = {
     memorySize = 1024;
@@ -9,13 +8,10 @@
 
   # https://github.com/NixOS/nixops/issues/574#issuecomment-443540177
   systemd.additionalUpstreamSystemUnits =
-  [ "proc-sys-fs-binfmt_misc.automount"
-    "proc-sys-fs-binfmt_misc.mount"
-  ];
-  
+    [ "proc-sys-fs-binfmt_misc.automount" "proc-sys-fs-binfmt_misc.mount" ];
+
   networking.firewall.enable = false;
-  environment.systemPackages = [
-     pkgs.vim pkgs.iptables pkgs.nmap pkgs.htop pkgs.tmux
-   ];
+  environment.systemPackages =
+    [ pkgs.vim pkgs.iptables pkgs.nmap pkgs.htop pkgs.tmux ];
 
 }

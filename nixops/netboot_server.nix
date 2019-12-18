@@ -3,7 +3,7 @@
 with lib;
 
 let
-  nixos_release = import (pkgs.path + "/nixos/release.nix") {};
+  nixos_release = import (pkgs.path + "/nixos/release.nix") { };
 
   netboot = let
     build = (import (pkgs.path + "/nixos/lib/eval-config.nix") {
@@ -14,7 +14,7 @@ let
         module
       ];
     }).config.system.build;
-  
+
   in pkgs.symlinkJoin {
     name = "netboot";
     paths = with build; [ netbootRamdisk kernel netbootIpxeScript ];
@@ -38,14 +38,14 @@ let
     '';
   });
 
-  tftp_root = pkgs.runCommand "tftproot" {} ''
+  tftp_root = pkgs.runCommand "tftproot" { } ''
     mkdir -pv $out
     cp -vi ${ipxe'}/undionly.kpxe $out/undionly.kpxe
     cp -vi ${ipxe'}/x86_64-ipxe.efi $out/x86_64-ipxe.efi
     cp -vi ${ipxe'}/i386-ipxe.efi $out/i386-ipxe.efi
   '';
 
-  nginx_root = pkgs.runCommand "nginxroot" {} ''
+  nginx_root = pkgs.runCommand "nginxroot" { } ''
     mkdir -pv $out
     cat <<EOF > $out/boot.php
     #!ipxe
@@ -59,7 +59,7 @@ let
 in {
   options = {
     netboot_server = {
-      
+
       network.wan = mkOption {
         type = types.str;
         description = "the internet facing IF";
@@ -77,11 +77,7 @@ in {
     services = {
       nginx = {
         enable = true;
-        virtualHosts = {
-          "192.168.3.1" = {
-            root = nginx_root;
-          };
-        };
+        virtualHosts = { "192.168.3.1" = { root = nginx_root; }; };
       };
       dhcpd4 = {
         interfaces = [ cfg.network.lan ];
@@ -120,7 +116,10 @@ in {
     networking = {
       interfaces = {
         ${cfg.network.lan} = {
-          ip4 = [ { address = "192.168.3.1"; prefixLength = 24; } ];
+          ip4 = [{
+            address = "192.168.3.1";
+            prefixLength = 24;
+          }];
         };
       };
       nat = {

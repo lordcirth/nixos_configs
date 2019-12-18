@@ -9,11 +9,11 @@
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
-  }; 
+  };
 
   boot.loader.grub.devices = [ "/dev/vda" ];
   boot.plymouth.enable = false;
-  users.users.root.initialPassword = "root"; #TODO
+  users.users.root.initialPassword = "root"; # TODO
 
   services.xserver = {
     #displayManager.slim.enable = true;

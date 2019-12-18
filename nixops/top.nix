@@ -1,15 +1,11 @@
 {
-  network = {
-    rollback = true;
-  };
+  network = { rollback = true; };
 
-  defaults = {
-    imports = [ ./vbox.nix ];
-  };
+  defaults = { imports = [ ./vbox.nix ]; };
 
   haproxy = import ./haproxy.nix {
-#    inherit config pkgs;
-    backends = []; 
+    #    inherit config pkgs;
+    backends = [ ];
   };
 
   web01 = import ./web.nix;
@@ -18,5 +14,5 @@
   #pxe = import ./pxe.nix;
   #pxe = import ./netboot_server.nix;
 
- # ram = import ./ramdisk.nix;
+  # ram = import ./ramdisk.nix;
 }
