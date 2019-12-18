@@ -12,4 +12,10 @@
   [ "proc-sys-fs-binfmt_misc.automount"
     "proc-sys-fs-binfmt_misc.mount"
   ];
+  
+  networking.firewall.enable = false;
+  environment.systemPackages = [
+     pkgs.vim pkgs.iptables pkgs.nmap pkgs.htop pkgs.tmux
+   ];
+
 }

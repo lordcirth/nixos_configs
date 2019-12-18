@@ -4,6 +4,7 @@ with lib;
 
 let
   nixos_release = import (pkgs.path + "/nixos/release.nix") {};
+
   netboot = let
     build = (import (pkgs.path + "/nixos/lib/eval-config.nix") {
       system = "x86_64-linux";
@@ -13,10 +14,12 @@ let
         module
       ];
     }).config.system.build;
+  
   in pkgs.symlinkJoin {
     name = "netboot";
     paths = with build; [ netbootRamdisk kernel netbootIpxeScript ];
   };
+
   module = {
     kexec.justdoit = {
       luksEncrypt = true;
@@ -25,6 +28,7 @@ let
       bootSize = 512;
     };
   };
+
   ipxe' = pkgs.ipxe.overrideDerivation (drv: {
     installPhase = ''
       ${drv.installPhase}
@@ -33,12 +37,14 @@ let
       cp -v bin-i386-efi/ipxe.efi $out/i386-ipxe.efi
     '';
   });
+
   tftp_root = pkgs.runCommand "tftproot" {} ''
     mkdir -pv $out
     cp -vi ${ipxe'}/undionly.kpxe $out/undionly.kpxe
     cp -vi ${ipxe'}/x86_64-ipxe.efi $out/x86_64-ipxe.efi
     cp -vi ${ipxe'}/i386-ipxe.efi $out/i386-ipxe.efi
   '';
+
   nginx_root = pkgs.runCommand "nginxroot" {} ''
     mkdir -pv $out
     cat <<EOF > $out/boot.php
@@ -47,15 +53,19 @@ let
     EOF
     ln -sv ${netboot} $out/netboot
   '';
+
   cfg = config.netboot_server;
+
 in {
   options = {
     netboot_server = {
+      
       network.wan = mkOption {
         type = types.str;
         description = "the internet facing IF";
         default = "wlan0";
       };
+
       network.lan = mkOption {
         type = types.str;
         description = "the netboot client facing IF";
