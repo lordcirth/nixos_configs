@@ -3,10 +3,7 @@
 
   defaults = { imports = [ ./vbox.nix ]; };
 
-  haproxy = import ./haproxy.nix {
-    #    inherit config pkgs;
-    backends = [ ];
-  };
+  haproxy = import ./haproxy.nix;
 
   web01 = import ./web.nix;
   web02 = import ./web.nix;

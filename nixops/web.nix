@@ -4,7 +4,6 @@
     adminAddr = "lordcirth@gmail.com";
     documentRoot = "/var/www";
   };
-  systemd.services.httpd = { requires = [ "httpd-init" ]; };
 
   systemd.services.httpd-init = {
     script = ''
@@ -13,6 +12,8 @@
       chown -R wwwrun /var/www
     '';
     restartIfChanged = true;
+    before = [ "httpd.service" ];
+    requiredBy = [ "httpd.service" ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
