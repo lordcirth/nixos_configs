@@ -1,5 +1,5 @@
 { config, pkgs, ... }: {
-  deployment.targetHost = "192.168.122.19";
+  #deployment.targetHost = "192.168.122.19";
   boot.loader.grub.devices = [ "/dev/sda" ];
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixos";
