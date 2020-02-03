@@ -12,4 +12,6 @@
   #pxe = import ./netboot_server.nix;
 
   # ram = import ./ramdisk.nix;
+
+  laptop = { imports = [./bob.nix ./laptop.nix]; };
 }
