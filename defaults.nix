@@ -1,7 +1,7 @@
-{ pkgs }:
+{ pkgs, ... }:
 let rootfs = "/dev/disk/by-label/nixos";
 in {
-  inherit pkgs;
+  #inherit pkgs;
   fileSystems."/" = {
     device = rootfs;
     fsType = "ext4";
@@ -19,6 +19,7 @@ in {
   '';
 
   services.openssh.enable = true;
+  services.qemuGuest.enable = true;
 
   users.mutableUsers = false;
 }
