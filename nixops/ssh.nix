@@ -19,5 +19,9 @@
     ];
   };
 
+  # https://github.com/NixOS/nixops/issues/574#issuecomment-443540177
+  systemd.additionalUpstreamSystemUnits =
+    [ "proc-sys-fs-binfmt_misc.automount" "proc-sys-fs-binfmt_misc.mount" ];
+
   environment.systemPackages = [ pkgs.vim ];
 }
