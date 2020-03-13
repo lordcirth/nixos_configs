@@ -1,6 +1,6 @@
 {
   network = { rollback = true; };
-  defaults = { imports = [ ./ssh.nix ]; };
+  defaults = { imports = [ ./ssh.nix ./bob.nix ]; };
 
   kvm = {
     deployment.targetHost = "192.168.1.222";
