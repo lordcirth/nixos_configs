@@ -2,7 +2,11 @@
   services.httpd = {
     enable = true;
     adminAddr = "lordcirth@gmail.com";
-    documentRoot = "/var/www";
+    virtualHosts = [
+      {
+        documentRoot = "/var/www";
+      }
+    ];
   };
 
   systemd.services.httpd-init = {
