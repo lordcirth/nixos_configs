@@ -1,17 +1,19 @@
 {
   network = { rollback = true; };
+  defaults = { imports = [ ./all.nix ./bob.nix ./kvm.nix ]; };
 
-  defaults = { imports = [ ./vbox.nix ]; };
+  kvm = {
+    deployment.targetHost = "192.168.1.222";
+    services.ipfs = {
+      enable          = true;
+      apiAddress      = "/ip4/192.168.1.222/tcp/5001";
+      gatewayAddress  = "/ip4/192.168.1.222/tcp/8080";
+    };
 
-  haproxy = import ./haproxy.nix;
+  };
 
-  web01 = import ./web.nix;
-  web02 = import ./web.nix;
-
-  #pxe = import ./pxe.nix;
-  #pxe = import ./netboot_server.nix;
-
-  # ram = import ./ramdisk.nix;
-
-  laptop = { imports = [./bob.nix ./laptop.nix]; };
+#  pxe = {
+#    deployment.targetHost = "192.168.1.248";
+#    imports = [ ./pxe.nix ];
+#  };
 }

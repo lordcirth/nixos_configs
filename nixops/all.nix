@@ -1,10 +1,10 @@
 { config, pkgs, ... }: {
-  #deployment.targetHost = "192.168.122.19";
-  boot.loader.grub.devices = [ "/dev/sda" ];
-  fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
-    fsType = "ext4";
-  };
+
+  # https://github.com/NixOS/nixops/issues/574#issuecomment-443540177
+  systemd.additionalUpstreamSystemUnits =
+    [ "proc-sys-fs-binfmt_misc.automount" "proc-sys-fs-binfmt_misc.mount" ];
+
+  environment.systemPackages = [ pkgs.vim ];
 
   boot.plymouth.enable = false;
   services.openssh.enable = true;
@@ -19,9 +19,4 @@
     ];
   };
 
-  # https://github.com/NixOS/nixops/issues/574#issuecomment-443540177
-  systemd.additionalUpstreamSystemUnits =
-    [ "proc-sys-fs-binfmt_misc.automount" "proc-sys-fs-binfmt_misc.mount" ];
-
-  environment.systemPackages = [ pkgs.vim ];
 }

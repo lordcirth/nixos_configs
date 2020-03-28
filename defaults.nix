@@ -8,6 +8,7 @@ in {
   };
 
   boot.loader.grub.devices = [ "/dev/vda" ];
+  boot.initrd.availableKernelModules = [ "virtio_balloon" "virtio_blk" "virtio_pci" "virtio_ring" ];
 
   # Expand rootfs to max
   # Stolen from https://github.com/NixOS/nixpkgs/blob/4de58b617bf52509cdfa7946f46505166f0bc3de/nixos/modules/installer/cd-dvd/sd-image.nix#L203
