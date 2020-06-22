@@ -4,7 +4,7 @@
   systemd.additionalUpstreamSystemUnits =
     [ "proc-sys-fs-binfmt_misc.automount" "proc-sys-fs-binfmt_misc.mount" ];
 
-  environment.systemPackages = [ pkgs.vim ];
+  environment.systemPackages = [ pkgs.git pkgs.tmux pkgs.vim ];
 
   boot.plymouth.enable = false;
   services.openssh.enable = true;
@@ -18,5 +18,4 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuHIVfeoZ+0OGL2hfOSZu9MV247e+u1i/jb323iCkUr nfish@rsg-pc247"
     ];
   };
-
 }
