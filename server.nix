@@ -9,6 +9,8 @@
     format = "qcow2";
   };
 
+  services.getty.helpLine = "ens3: \\4{ens3}";
+  services.openssh.passwordAuthentication = false;
   users.users.root = {
     password = "root";
     # If this is not also in the NixOps config, you will be locked out!
@@ -17,5 +19,5 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMiU1uUKbgdcG6h6HR3t0zhB6enaCHrBs5QZlWHJV58 nfish@desna"
     ];
   };
-  system.stateVersion = "23.05";
+  system.stateVersion = "22.11";
 }
