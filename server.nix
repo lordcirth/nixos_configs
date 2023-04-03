@@ -6,7 +6,7 @@
   system.build.image = import <nixpkgs/nixos/lib/make-disk-image.nix> {
     inherit pkgs lib config;
     diskSize = 16 * 1024;
-    format = "raw";
+    format = "qcow2";
   };
 
   users.users.root = {
@@ -14,7 +14,8 @@
     # If this is not also in the NixOps config, you will be locked out!
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAXm7oXqY1G8dBDqP7TziaXFyVwHJ5ivgwweGAWzaSDT lordcirth@nezha"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuHIVfeoZ+0OGL2hfOSZu9MV247e+u1i/jb323iCkUr nfish@rsg-pc247"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMiU1uUKbgdcG6h6HR3t0zhB6enaCHrBs5QZlWHJV58 nfish@desna"
     ];
   };
+  system.stateVersion = "23.05";
 }
