@@ -20,4 +20,5 @@
     ];
   };
   system.stateVersion = "22.11";
+  environment.systemPackages = with pkgs; [ tmux tcpdump ethtool iotop htop ];
 }
