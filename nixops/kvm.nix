@@ -1,10 +1,10 @@
 { config, pkgs, ... }: {
-  boot.loader.grub.devices = [ "/dev/sda" ];
+  boot.loader.grub.devices = [ "/dev/vda" ];
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixos";
+    device = "/dev/vda1";
     fsType = "ext4";
     };
-
+    boot.initrd.availableKernelModules = [ "virtio_balloon" "virtio_blk" "virtio_pci" "virtio_ring" ];
     services.qemuGuest.enable = true;
     networking.firewall.enable = false;
 }
