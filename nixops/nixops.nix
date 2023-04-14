@@ -7,7 +7,17 @@
     networking.firewall.enable = false;
   };
 
-  nixos-ceph-0 = { deployment.targetHost = "172.19.55.2"; };
-  nixos-ceph-1 = { deployment.targetHost = "172.19.55.3"; };
-  nixos-ceph-2 = { deployment.targetHost = "172.19.55.4"; };
+  nixos-ceph-0 = {
+    deployment.targetHost = "172.19.55.2";
+    imports = [ ./ceph.nix ];
+  };
+  nixos-ceph-1 = {
+    deployment.targetHost = "172.19.55.3";
+    imports = [ ./ceph.nix ];
+  };
+
+  nixos-ceph-2 = {
+    deployment.targetHost = "172.19.55.4";
+    imports = [ ./ceph.nix ];
+  };
 }
