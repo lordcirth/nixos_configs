@@ -17,7 +17,7 @@
   };
 
   nixos-ceph-2 = {
-    deployment.targetHost = "172.19.55.4";
+    deployment.targetHost = "172.19.55.131";
     imports = [ ./ceph.nix ];
   };
 }
