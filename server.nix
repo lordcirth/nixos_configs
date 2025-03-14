@@ -19,6 +19,6 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMiU1uUKbgdcG6h6HR3t0zhB6enaCHrBs5QZlWHJV58 nfish@desna"
     ];
   };
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
   environment.systemPackages = with pkgs; [ tmux tcpdump ethtool iotop htop ];
 }
