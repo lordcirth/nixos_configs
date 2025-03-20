@@ -20,6 +20,7 @@
           virtualisation.diskSize = 20 * 1024;
         }
         ./defaults.nix
+	./ipfs.nix
         #./server.nix
       ];
 
