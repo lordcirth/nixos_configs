@@ -1,14 +1,6 @@
 { pkgs, ... }:
 let rootfs = "/dev/disk/by-label/nixos";
 in {
-  #inherit pkgs;
-  fileSystems."/" = {
-    device = rootfs;
-    fsType = "ext4";
-  };
-
-  boot.loader.grub.devices = [ "/dev/vda" ];
-  boot.initrd.availableKernelModules = [ "virtio_balloon" "virtio_blk" "virtio_pci" "virtio_ring" ];
 
   # Expand rootfs to max
   # Stolen from https://github.com/NixOS/nixpkgs/blob/4de58b617bf52509cdfa7946f46505166f0bc3de/nixos/modules/installer/cd-dvd/sd-image.nix#L203
@@ -19,8 +11,17 @@ in {
     ${pkgs.e2fsprogs}/bin/resize2fs "${rootfs}"
   '';
 
+  system.stateVersion = "24.11";
+
   services.openssh.enable = true;
-  services.qemuGuest.enable = true;
+  users.users.root = {
+    password = "root";
+    # If this is not also in the NixOps config, you will be locked out!
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAXm7oXqY1G8dBDqP7TziaXFyVwHJ5ivgwweGAWzaSDT lordcirth@nezha"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEMiU1uUKbgdcG6h6HR3t0zhB6enaCHrBs5QZlWHJV58 nfish@desna"
+    ];
+  };
 
   users.mutableUsers = false;
 }
